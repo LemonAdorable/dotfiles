@@ -1,12 +1,25 @@
-{{- $email := promptStringOnce . "email" "Enter your Git email address" -}}
-{{- $name := promptStringOnce . "name" "Enter your Git username" -}}
+{{- $email := "" -}}
+{{- if (hasKey . "email") -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptStringOnce . "email" "Enter your Git email address" -}}
+{{- end -}}
 
-# encryption = "age"
-# [age]
-#     command = "rage"
-#     identities = ["/home/user/key1.txt"]
-#     recipients = ["recipient1", "recipient2"]
+{{- $name := "" -}}
+{{- if (hasKey . "name") -}}
+{{-   $name = .name -}}
+{{- else -}}
+{{-   $name = promptStringOnce . "name" "Enter your Git username" -}}
+{{- end -}}
 
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
+
+[diff]
+    pager = "diffnav"
+
+[merge]
+    command = "nvim"
+    args = ["-d", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Source {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+
