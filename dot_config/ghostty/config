@@ -51,3 +51,6 @@ gtk-single-instance = true
 #theme = Catppuccin Mocha
 theme = dankcolors
 #theme = catppuccin <flavor>, where <flavor> is one of latte, frappe, macchiato, or mocha.
+
+# command = zellij attach -c main
+#command = /usr/bin/fish
